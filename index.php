@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -50,7 +51,7 @@
 
     img.avatar {
       width: 220px;
-      hight: auto;
+      height: auto;
       border-radius: 50%;
     }
 

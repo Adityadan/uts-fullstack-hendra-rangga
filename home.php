@@ -4,9 +4,9 @@ require_once("class/parent.php");
 
 
 // echo "tes" . $_SESSION['userid'];
-// if(!isset($_SESSION['userid'])) {
-// 	header("location: index.php"); //belum login, wajib login dulu
-// }
+if(!isset($_SESSION['userid'])) {
+	header("location: index.php"); //belum login, wajib login dulu
+}
 $mysqli = new mysqli("localhost", "root", "", "fullstack_uts");
 if ($mysqli->connect_errno) {
 	echo "Failed to connect to MySQL: " . $mysqli->connect_error;
@@ -51,13 +51,18 @@ $cerita = new cerita();
 
 	// dengan limit
 	$res = $cerita->getcerita($cari_persen, $offset, $PER_PAGE);
-
+	
 	echo "<p>";
 	echo "<form method='GET'>";
 	echo "<label>Masukkan judul</label> ";
 	echo "<input type='text' name='cari'> ";
 	echo "<button type='submit'>Cari</button>";
 	echo "</form>";
+	echo '
+	<form method="post" action="cerita_baru.php">
+		<a href="cerita_baru.php">
+			<input type="button" name="btncerita" value="Cerita Baru"></a><br><br>
+	</form>';
 	echo "</p>";
 	if (isset($_GET['cari'])) {
 		echo "<p><i>Hasil pencarian untuk kata kunci '" . $_GET['cari'] . "'</i></p>";
@@ -92,11 +97,11 @@ $cerita = new cerita();
 	}
 	echo "</div>";
 	?>
-	<br>
-	<form method="post" action="cerita_baru.php">
-		<a href="cerita_baru.php">
-			<input type="button" name="btncerita" value="Cerita Baru"></a><br><br>
+	<form method="post" action="logout_proses.php">
+		<a href="logout_proses.php">
+			<input type="button" name="btncerita" value="Logout"></a><br><br>
 	</form>
+	<br>
 </body>
 
 </html>
