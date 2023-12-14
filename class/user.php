@@ -46,8 +46,6 @@ class Users extends Parentclass
 		$stmt->bind_param("ss", $userid, $encrypted_pwd);
 		$stmt->execute();
 		$res = $stmt->get_result();
-		// echo '<pre>' . var_export($res, true) . '</pre>';
-		// die();
 		if ($res->num_rows > 0) {
 			$this->createSession($res->fetch_assoc());
 			return "sukses";
