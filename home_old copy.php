@@ -1,11 +1,11 @@
 <?php
 require_once("class/cerita.php");
 require_once("class/parent.php");
-// require_once("css/custom_css.css");
+require_once("css/custom_css.css");
 
 
 // echo "tes" . $_SESSION['userid'];
-if (!isset($_SESSION['userid'])) {
+if(!isset($_SESSION['userid'])) {
 	header("location: index.php"); //belum login, wajib login dulu
 }
 $mysqli = new mysqli("localhost", "root", "", "fullstack_uts");
@@ -24,9 +24,8 @@ $cerita = new cerita();
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="css/custom_css.css">
-
 	<title>HALAMAN HOME</title>
+
 </head>
 
 <body>
@@ -43,7 +42,7 @@ $cerita = new cerita();
 
 	// dengan limit
 	$res = $cerita->getcerita($cari_persen, $offset, $PER_PAGE);
-
+	
 	echo "<p>";
 	echo "<form method='GET'>";
 	echo "<label>Masukkan judul</label> ";
@@ -60,19 +59,19 @@ $cerita = new cerita();
 		echo "<p><i>Hasil pencarian untuk kata kunci '" . $_GET['cari'] . "'</i></p>";
 	}
 
-	echo '<table border="1">
+	echo "<table border='1'>
 	<tr> 
-		<th class="rata-tengah">Judul</th> 
+		<th>Judul</th> 
 		<th>Pembuat Awal</th>
 		 <th>Aksi</th>
 
 		 
-	</tr>';
+	</tr>";
 
 	while ($row = $res->fetch_assoc()) {
 
 		echo "<tr>";
-		echo "<td class=''>" . $row['judul'] . "</td>";
+		echo "<td>" . $row['judul'] . "</td>";
 		echo "<td>" . $row['id_user_pembuat_awal'] . "</td>";
 		echo "<td><a href='lihat_cerita.php?id={$row['idcerita']}'>" . 'Lihat Cerita' . "</a></td>";
 
@@ -93,18 +92,6 @@ $cerita = new cerita();
 		<a href="logout_proses.php">
 			<input type="button" name="btncerita" value="Logout"></a><br><br>
 	</form>
-	<div class="card card-primary">
-		<div class="card-header">
-			Header
-		</div>
-		<div class="card-body">
-			Body
-		</div>
-		<div class="card-footer">
-			Footer
-		</div>
-	</div>
-
 	<br>
 </body>
 
