@@ -23,7 +23,7 @@ class Users extends Parentclass
 
 	private function getSalt($userid)
 	{
-		$sql = "SELECT salt FROM user WHERE nama=?";
+		$sql = "SELECT salt FROM user WHERE idusers=?";
 		$stmt = $this->mysqli->prepare($sql);
 		
 		if ($stmt) {
@@ -34,7 +34,6 @@ class Users extends Parentclass
 			// Periksa apakah ada baris yang ditemukan
 			if ($res) {
 				$userSalt = $res->fetch_assoc();
-
 				if ($userSalt) {
 					return $userSalt["salt"];
 				} else {
@@ -58,9 +57,8 @@ class Users extends Parentclass
 	{
 		$salt = $this->getSalt($userid);
 		$encrypted_pwd = $this->encryptPwd($pwd, $salt);
-		$sql = "Select * From user Where nama=? And password=?";
+		$sql = "Select * From user Where idusers=? And password=?";
 		$stmt = $this->mysqli->prepare($sql);
-		
 		$stmt->bind_param("ss", $userid, $encrypted_pwd);
 		$stmt->execute();
 		$res = $stmt->get_result();
@@ -71,13 +69,13 @@ class Users extends Parentclass
 	}
 	public function registrasi($arrData)
 	{
-		$sql = "Insert Into user (nama,password,salt) Values (?,?,?)";
+		$sql = "Insert Into user (idusers,nama,password,salt) Values (?,?,?,?)";
 		$stmt = $this->mysqli->prepare($sql);
 		$salt = $this->generateSalt();
 		$encrypted_pwd = $this->encryptPwd($arrData['password'], $salt);
 		// var_dump($encrypted_pwd);
 		// die();
-		$stmt->bind_param("sss", $arrData['nama'], $encrypted_pwd, $salt);
+		$stmt->bind_param("isss", $arrData['userid'],$arrData['nama'], $encrypted_pwd, $salt);
 		$stmt->execute();
 	}
 }

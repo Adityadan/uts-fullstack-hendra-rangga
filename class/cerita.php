@@ -95,6 +95,26 @@ class Cerita extends Parentclass
         $stmt->close();
         $this->mysqli->close();
     }
+    public function detailceritaall()
+    {
+        $sql = "SELECT * FROM cerita LEFT JOIN paragraf ON paragraf.idcerita = cerita.idcerita";
+        // Prepare the statement
+        $stmt = $this->mysqli->prepare($sql);
+
+        // Execute the query
+        $stmt->execute();
+
+        // Get the result
+        $result = $stmt->get_result();
+
+        // Fetch all rows as an associative array
+        $data = $result->fetch_all(MYSQLI_ASSOC);
+
+        return $data;
+        // Close the statement and connection
+        $stmt->close();
+        $this->mysqli->close();
+    }
     public function updateIsiParagraf($idcerita)
     {
         $hasil = "";

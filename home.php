@@ -25,87 +25,44 @@ $cerita = new cerita();
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/custom_css.css">
+	<script type="text/javascript" src="js/jquery-3.7.1.js"></script>
+
 
 	<title>HALAMAN HOME</title>
 </head>
 
 <body>
-	<?php
-	$offset = isset($_GET['offset']) ? $_GET['offset'] : 0;
-	if (!is_numeric($offset)) $offset = 0;
-
-	$cari = isset($_GET['cari']) ? $_GET['cari'] : "";
-	$cari_persen = "%" . $cari . "%";
-
-	// tanpa limit cari jumlah data
-	$res = $cerita->getcerita($cari_persen);
-	$jumlah_data = $res->num_rows;
-
-	// dengan limit
-	$res = $cerita->getcerita($cari_persen, $offset, $PER_PAGE);
-
-	echo "<p>";
-	echo "<form method='GET'>";
-	echo "<label>Masukkan judul</label> ";
-	echo "<input type='text' name='cari'> ";
-	echo "<button type='submit'>Cari</button>";
-	echo "</form>";
-	echo '
-	<form method="post" action="cerita_baru.php">
-		<a href="cerita_baru.php">
-			<input type="button" name="btncerita" value="Cerita Baru"></a><br><br>
-	</form>';
-	echo "</p>";
-	if (isset($_GET['cari'])) {
-		echo "<p><i>Hasil pencarian untuk kata kunci '" . $_GET['cari'] . "'</i></p>";
-	}
-
-	echo '<table border="1">
-	<tr> 
-		<th class="rata-tengah">Judul</th> 
-		<th>Pembuat Awal</th>
-		 <th>Aksi</th>
-
-		 
-	</tr>';
-
-	while ($row = $res->fetch_assoc()) {
-
-		echo "<tr>";
-		echo "<td class=''>" . $row['judul'] . "</td>";
-		echo "<td>" . $row['id_user_pembuat_awal'] . "</td>";
-		echo "<td><a href='lihat_cerita.php?id={$row['idcerita']}'>" . 'Lihat Cerita' . "</a></td>";
-
-
-		echo "</tr>";
-	}
-	echo "</table>";
-
-
-	echo "<div>";
-	$maks_halaman = ceil($jumlah_data / $PER_PAGE);
-	for ($i = 1; $i <= $maks_halaman; $i++) {
-		echo "<a href='?offset=" . (($i - 1) * $PER_PAGE) . "&cari1=$cari'>$i</a> ";
-	}
-	echo "</div>";
-	?>
-	<form method="post" action="logout_proses.php">
-		<a href="logout_proses.php">
-			<input type="button" name="btncerita" value="Logout"></a><br><br>
-	</form>
-	<div class="card card-primary">
-		<div class="card-header">
-			Header
-		</div>
-		<div class="card-body">
-			Body
-		</div>
-		<div class="card-footer">
-			Footer
+	<div class="container">
+		<div class="ceritaku">
 		</div>
 	</div>
-
-	<br>
 </body>
 
+<script type="text/javascript">
+	$(document).ready(function() {
+		// Fungsi untuk melakukan Ajax GET dengan $.ajax()
+		// $.ajax({
+		// 	url: 'server.php', // Ganti dengan URL server Anda
+		// 	type: 'GET',
+		// 	dataType: 'json',
+		// 	success: function(responseData) {
+		// 		console.log(responseData);
+		// 		// Tampilkan data di dalam div dengan id "ajax-response"
+		// 		var html = '';
+		// 		responseData.forEach(element => {
+		// 			html += '<div class="card"> </div>';
+		// 		});
+		// 		$('.ceritaku').html(
+		// 		);
+		// 	},
+		// 	error: function(xhr, status, error) {
+		// 		console.error('Error:', status, error);
+		// 	}
+		// });
+		$.get('class/cerita.php', { action: 'getcerita' }, function (data) {
+            // Handle the response from the server
+            console.log(data);
+        });
+	});
+</script>
 </html>
