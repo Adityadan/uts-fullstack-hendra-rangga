@@ -102,22 +102,6 @@ p {
 .rata-tengah {
   text-align: center;
 }
-/* .button {
-    width: 100px;
-    height: 50px;
-    border-radius: 5px;
-    background-color: #000;
-    color: #fff;
-    border: 1px solid #fff;
-    box-shadow: 0 0 2px #ccc;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  .button:hover {
-    background-color: #fff;
-    color: #000;
-  } */
-
 .poster {
   max-width: 100px;
 }
@@ -126,159 +110,16 @@ p {
   width: 200px;
   height: 300px;
   border-radius: 5px;
-  background-color: #ccc;
+  /* background-color: #ccc; */
   color: #000;
   border: 1px solid #000;
-  box-shadow: 0 0 2px #ccc;
+  /* box-shadow: 0 0 2px #ccc; */
   transition: background-color 0.3s ease-in-out;
-}
-
-.card:hover {
-  background-color: #fff;
-}
-
-@media (max-width: 1023px) {
-  .container {
-    width: 768px;
-    margin: 0 auto;
-  }
-
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .category-list {
-    margin-top: 20px;
-  }
-
-  .category-list ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .category-list li {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .story-list {
-    margin-top: 20px;
-  }
-
-  .story-list ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .story-list li {
-    margin-bottom: 20px;
-    width: 50%;
-    float: left;
-  }
-
-  .pagination {
-    text-align: center;
-  }
-
-  .pagination a {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 0 5px;
-    border-radius: 5px;
-  }
-}
-
-@media (max-width: 575px) {
-  .container {
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .category-list {
-    margin-top: 20px;
-  }
-
-  .category-list ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .category-list li {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .story-list {
-    margin-top: 20px;
-  }
-
-  .story-list ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .story-list li {
-    margin-bottom: 20px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .pagination {
-    text-align: center;
-  }
-
-  .pagination a {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 0 5px;
-    border-radius: 5px;
-  }
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
-.card {
-  background-color: #f5f5f5;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 15px;
-  margin: 10px;
-  display: flex;
-  flex-direction: column;
-}
-/* form {
-  border: 3px solid #f1f1f1;
-} */
-
-/* input[type="text"],
-input[type="password"] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-} */
-
 
 button:hover {
   opacity: 0.8;
@@ -308,16 +149,4 @@ img.avatar {
 span.psw {
   float: right;
   padding-top: 16px;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-    display: block;
-    float: none;
-  }
-
-  .cancelbtn {
-    width: 100%;
-  }
 }

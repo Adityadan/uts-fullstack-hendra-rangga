@@ -1,0 +1,106 @@
+.kategori-combobox {
+  display: none;
+  margin-bottom: 10px;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  /* align-items: start; */
+  width: 100vw;
+}
+
+.ceritaku-container {
+  /* background-color: #f9f9f9; */
+  /* border: 1px solid #ddd; */
+  padding-right: 15%;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+}
+
+.kumpulan-cerita-container {
+}
+
+.ceritaku-cards-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.kumpulan-cerita-cards-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Explicitly define two columns */
+  gap: 1em;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.container-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.card {
+  /* border: 1px solid #ddd; */
+  padding: 10px;
+  margin: 5px 0;
+}
+
+.title {
+  /* padding: 10px;
+            margin: 5px 0; */
+}
+
+@media screen and (max-width: 1023px) {
+  .container-content {
+    flex-direction: column;
+  }
+
+  .ceritaku-container,
+  .kumpulan-cerita-container {
+    margin-bottom: 20px;
+  }
+
+  .kumpulan-cerita-container {
+    order: -1;
+  }
+
+  .ceritaku-cards-container,
+  .kumpulan-cerita-cards-container {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .kategori-combobox {
+    display: none;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .kategori-combobox {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .ceritaku-container {
+    display: none;
+  }
+
+  .kumpulan-cerita-container {
+    margin-bottom: 20px;
+  }
+
+  .ceritaku-cards-container,
+  .kumpulan-cerita-cards-container {
+    grid-template-columns: 1fr;
+  }
+}

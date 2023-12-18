@@ -59,16 +59,60 @@ class Cerita extends Parentclass
 
     public function getcerita($cariJudul = "", $offset = 0, $limit = null)
     {
-        $sql = "Select * From cerita Where judul Like ?";
+        $sql = "SELECT
+                cerita.*,
+		        user.nama,
+                COUNT(paragraf.idparagraf) AS jumlah_paragraf
+            FROM
+                cerita
+            JOIN
+                paragraf ON cerita.idcerita = paragraf.idcerita
+		    JOIN user ON cerita.id_user_pembuat_awal = user.idusers    
+
+            WHERE
+                cerita.judul LIKE ?
+            GROUP BY
+                cerita.idcerita";
+
+        if (!is_null($limit)) {
+            $sql .= " LIMIT ?, ?";
+        }
+
+        $stmt = $this->mysqli->prepare($sql);
 
         if (is_null($limit)) {
-            $stmt = $this->mysqli->prepare($sql);
             $stmt->bind_param("s", $cariJudul);
         } else {
-            $sql .= " Limit ?,?";
-            $stmt = $this->mysqli->prepare($sql);
             $stmt->bind_param("sii", $cariJudul, $offset, $limit);
         }
+
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+    public function getceritaall($offset = 0, $limit = null)
+    {
+        $sql = "SELECT
+                cerita.*,
+		        user.nama,
+                COUNT(paragraf.idparagraf) AS jumlah_paragraf
+            FROM
+                cerita
+            JOIN
+                paragraf ON cerita.idcerita = paragraf.idcerita
+		    JOIN user ON cerita.id_user_pembuat_awal = user.idusers 
+            GROUP BY
+                cerita.idcerita";
+
+        if (!is_null($limit)) {
+            $sql .= " LIMIT ?, ?";
+        }
+
+        $stmt = $this->mysqli->prepare($sql);
+
+        if (($limit)) {
+            $stmt->bind_param("ii", $offset, $limit);
+        }
+
         $stmt->execute();
         return $stmt->get_result();
     }
@@ -80,26 +124,6 @@ class Cerita extends Parentclass
 
         // Bind parameters
         $stmt->bind_param("i", $idcerita);
-
-        // Execute the query
-        $stmt->execute();
-
-        // Get the result
-        $result = $stmt->get_result();
-
-        // Fetch all rows as an associative array
-        $data = $result->fetch_all(MYSQLI_ASSOC);
-
-        return $data;
-        // Close the statement and connection
-        $stmt->close();
-        $this->mysqli->close();
-    }
-    public function detailceritaall()
-    {
-        $sql = "SELECT * FROM cerita LEFT JOIN paragraf ON paragraf.idcerita = cerita.idcerita";
-        // Prepare the statement
-        $stmt = $this->mysqli->prepare($sql);
 
         // Execute the query
         $stmt->execute();
