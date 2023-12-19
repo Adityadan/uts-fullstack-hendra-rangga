@@ -84,7 +84,7 @@
                             <h2>${row.judul}</h2>
                             <p>Pembuat Awal: ${row.nama}</p>
                             <p>Jumlah Paragraf: ${row.jumlah_paragraf}</p>
-                            <div class="actions"><a href="lihat_cerita.php?id=${row.idcerita}">baca lebih lanjut</a></div>
+                            <div class="actions"><a href="read.php?id=${row.idcerita}">baca lebih lanjut</a></div>
                         </div>
                     `;
 					});
@@ -120,7 +120,7 @@
                             <h2>${row.judul}</h2>
                             <p>Pembuat Awal: ${row.nama}</p>
                             <p>Jumlah Paragraf: ${row.jumlah_paragraf}</p>
-                            <div class="actions"><a href="lihat_cerita.php?id=${row.idcerita}">baca lebih lanjut</a></div>
+                            <div class="actions"><a href="read.php?id=${row.idcerita}">baca lebih lanjut</a></div>
                         </div>
                     `;
 					});

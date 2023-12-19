@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 header("Content-type:text/html; charset=UTF-8");
 header("Content-type:application/json");
 require_once("class/cerita.php");

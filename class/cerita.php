@@ -1,6 +1,6 @@
 <?php
 require_once("parent.php");
-// session_start();
+session_start();
 
 class Cerita extends Parentclass
 {
@@ -14,6 +14,7 @@ class Cerita extends Parentclass
         $judul = isset($data['judul']) ? $data['judul'] : "";
         //$pembuat_awal = isset($data['pembuat_awal']) ? $data['pembuat_awal'] : "";
         $paragraf = isset($data['paragraf']) ? $data['paragraf'] : "";
+        var_dump($_SESSION['userid']);
         $user = $_SESSION['userid'];
 
         $sql = "Insert Into cerita (judul,id_user_pembuat_awal) Values (?,?)";
