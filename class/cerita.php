@@ -1,7 +1,6 @@
 <?php
 require_once("parent.php");
-session_start();
-
+// session_start();
 
 class Cerita extends Parentclass
 {
@@ -57,38 +56,36 @@ class Cerita extends Parentclass
         }
     }
 
-    public function getcerita($cariJudul = "", $offset = 0, $limit = null)
+    public function getcerita($iduser = '', /* $cariJudul = "", */ $offset = 0, $limit = null)
     {
         $sql = "SELECT
                 cerita.*,
-		        user.nama,
+                user.nama,
                 COUNT(paragraf.idparagraf) AS jumlah_paragraf
             FROM
                 cerita
             JOIN
                 paragraf ON cerita.idcerita = paragraf.idcerita
-		    JOIN user ON cerita.id_user_pembuat_awal = user.idusers    
-
-            WHERE
-                cerita.judul LIKE ?
+            JOIN user ON cerita.id_user_pembuat_awal = user.idusers    
+            WHERE user.idusers = ?";
+            $sql .= "
             GROUP BY
-                cerita.idcerita";
-
+            cerita.idcerita";
         if (!is_null($limit)) {
-            $sql .= " LIMIT ?, ?";
+            $sql .= " LIMIT ? OFFSET ?";
         }
-
+        
         $stmt = $this->mysqli->prepare($sql);
-
         if (is_null($limit)) {
-            $stmt->bind_param("s", $cariJudul);
+            $stmt->bind_param("s",/*  $cariJudul, */ $iduser);
         } else {
-            $stmt->bind_param("sii", $cariJudul, $offset, $limit);
+            $stmt->bind_param("sii",/*  $cariJudul, */ $iduser,$limit,$offset);
         }
 
         $stmt->execute();
         return $stmt->get_result();
     }
+
     public function getceritaall($offset = 0, $limit = null)
     {
         $sql = "SELECT
@@ -104,13 +101,13 @@ class Cerita extends Parentclass
                 cerita.idcerita";
 
         if (!is_null($limit)) {
-            $sql .= " LIMIT ?, ?";
+            $sql .= " LIMIT ? OFFSET ?";
         }
 
         $stmt = $this->mysqli->prepare($sql);
 
         if (($limit)) {
-            $stmt->bind_param("ii", $offset, $limit);
+            $stmt->bind_param("ii", $limit,$offset);
         }
 
         $stmt->execute();

@@ -1,14 +1,19 @@
 <?php
 // Start the session
+header("Content-type: application/json; charset=UTF-8");
 session_start();
 
 // Unset all of the session variables
 $_SESSION = array();
 
-// Destroy the session
-session_destroy();
-
-// Redirect to the login page or any other page after logout
-header("Location: index.php"); // Replace 'login.php' with the page you want to redirect to
-exit();
+// Hancurkan sesi
+if (session_destroy()) {
+    // Mengembalikan respons JSON untuk memberi tahu klien bahwa logout berhasil
+    $response = ['success' => true];
+    echo json_encode($response);
+} else {
+    // Jika sesi tidak dapat dihancurkan
+    $response = ['success' => false, 'error' => 'Failed to destroy the session.'];
+    echo json_encode($response);
+}
 ?>

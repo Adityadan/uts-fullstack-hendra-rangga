@@ -110,10 +110,8 @@ p {
   width: 200px;
   height: 300px;
   border-radius: 5px;
-  /* background-color: #ccc; */
   color: #000;
   border: 1px solid #000;
-  /* box-shadow: 0 0 2px #ccc; */
   transition: background-color 0.3s ease-in-out;
 }
 
