@@ -17,7 +17,7 @@ if ($mysqli->connect_errno) {
 
 $cerita = new cerita();
 // Asumsikan $PER_PAGE didefinisikan secara global atau dalam kelas
-$PER_PAGE = 3;
+$PER_PAGE = 2;
 
 // Hitung offset berdasarkan halaman saat ini
 $halaman = isset($_POST['halaman']) ? intval($_POST['halaman']) : 1;
