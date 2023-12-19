@@ -1,3 +1,13 @@
+<?php
+session_start();
+
+// Memeriksa apakah sesi sudah dimulai atau belum
+if (!isset($_SESSION['userid'])) {
+    // Redirect ke halaman login jika belum login
+    header("Location: index.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

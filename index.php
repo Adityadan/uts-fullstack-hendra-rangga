@@ -1,4 +1,14 @@
 
+<?php
+session_start();
+
+// Memeriksa apakah sesi sudah dimulai dan pengguna sudah login
+if (isset($_SESSION['userid'])) {
+    // Redirect ke halaman home jika sudah login
+    header("Location: home.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html>
 

@@ -1,19 +1,18 @@
 <?php
 // session_start();
-header("Content-type:text/html; charset=UTF-8");
 header("Content-type:application/json");
 require_once("class/cerita.php");
-require_once("class/parent.php");
+// require_once("class/parent.php");
 
-if (!isset($_SESSION['userid'])) {
-    header("location: index.php");
-}
+// if (!isset($_SESSION['userid'])) {
+//     header("location: index.php");
+// }
 
-$mysqli = new mysqli("localhost", "root", "", "fullstack_uts");
+// $mysqli = new mysqli("localhost", "root", "", "fullstack_uts");
 
-if ($mysqli->connect_errno) {
-    echo "Failed to connect to MySQL: " . $mysqli->connect_error;
-}
+// if ($mysqli->connect_errno) {
+//     echo "Failed to connect to MySQL: " . $mysqli->connect_error;
+// }
 
 $cerita = new cerita();
 $PER_PAGE = 4;
