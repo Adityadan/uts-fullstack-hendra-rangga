@@ -41,6 +41,7 @@ if (!isset($_SESSION['userid'])) {
 				</div>
 				<button id="more_ceritaku">Tampilkan Cerita Selanjutnya</button>
 			</div>
+			<div class="divider"></div> 
 			<div class="kumpulan-cerita-container">
 				<h1>kumpulan cerita</h1>
 				<div class="kumpulan-cerita-cards-container">

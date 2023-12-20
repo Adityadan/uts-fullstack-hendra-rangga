@@ -22,9 +22,20 @@ body {
   /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
 }
 
-.kumpulan-cerita-container {
+/* .kumpulan-cerita-container {
+} */
+.divider {
+  /* height: 2px; */
+  background-color: #000000; 
+  /* margin: 10px 0;  */
+  width: 3px;
+  margin-right: 50px;
 }
-
+@media (max-width: 1024px) {
+  .divider {
+      display: none;
+  }
+}
 .ceritaku-cards-container {
   display: grid;
   grid-template-columns: 1fr;
