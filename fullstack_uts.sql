@@ -11,7 +11,7 @@
  Target Server Version : 80030 (8.0.30)
  File Encoding         : 65001
 
- Date: 14/12/2023 20:42:56
+ Date: 20/12/2023 09:48:05
 */
 
 SET NAMES utf8mb4;
@@ -27,8 +27,8 @@ CREATE TABLE `cerita`  (
   `id_user_pembuat_awal` int NOT NULL,
   PRIMARY KEY (`idcerita`) USING BTREE,
   INDEX `id_user_pembuat_awal`(`id_user_pembuat_awal` ASC) USING BTREE,
-  CONSTRAINT `cerita_ibfk_1` FOREIGN KEY (`id_user_pembuat_awal`) REFERENCES `user` (`idusers`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  CONSTRAINT `cerita_ibfk_1` FOREIGN KEY (`id_user_pembuat_awal`) REFERENCES `user` (`idusers`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of cerita
@@ -36,6 +36,11 @@ CREATE TABLE `cerita`  (
 INSERT INTO `cerita` VALUES (4, 'shalom', 160718039);
 INSERT INTO `cerita` VALUES (5, 'CEK SOUND', 160718039);
 INSERT INTO `cerita` VALUES (6, 'dami anjaz', 160718039);
+INSERT INTO `cerita` VALUES (7, 'kemerdekaan', 111);
+INSERT INTO `cerita` VALUES (8, 'tes cerita baru', 160718039);
+INSERT INTO `cerita` VALUES (9, 'kos tenggilis', 160718039);
+INSERT INTO `cerita` VALUES (10, 'tes cerita 4', 160718039);
+INSERT INTO `cerita` VALUES (11, 'tes cerita 5', 160718039);
 
 -- ----------------------------
 -- Table structure for paragraf
@@ -50,9 +55,9 @@ CREATE TABLE `paragraf`  (
   PRIMARY KEY (`idparagraf`) USING BTREE,
   INDEX `iduser`(`iduser` ASC) USING BTREE,
   INDEX `idcerita`(`idcerita` ASC) USING BTREE,
-  CONSTRAINT `paragraf_ibfk_1` FOREIGN KEY (`iduser`) REFERENCES `user` (`idusers`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `paragraf_ibfk_2` FOREIGN KEY (`idcerita`) REFERENCES `cerita` (`idcerita`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+  CONSTRAINT `paragraf_ibfk_2` FOREIGN KEY (`idcerita`) REFERENCES `cerita` (`idcerita`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `paragraf_ibfk_3` FOREIGN KEY (`iduser`) REFERENCES `user` (`idusers`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of paragraf
@@ -71,24 +76,33 @@ INSERT INTO `paragraf` VALUES (18, 160718039, 4, 'ajaoisdaisojdoaisjdjasoid', '2
 INSERT INTO `paragraf` VALUES (19, 160718039, 6, 'tes dami\r\n', '2023-12-14 13:30:23');
 INSERT INTO `paragraf` VALUES (20, 160718039, 6, 'dwi barbar', '2023-12-14 13:30:30');
 INSERT INTO `paragraf` VALUES (21, 160718039, 6, 'iqbal chobir', '2023-12-14 13:30:36');
+INSERT INTO `paragraf` VALUES (22, 111, 7, 'pada tahun 2012', '2023-12-16 14:50:02');
+INSERT INTO `paragraf` VALUES (23, 160718039, 8, 'pada zaman dlu kala hidup hendra dami yang suka membuat onar di dompu', '2023-12-19 07:57:39');
+INSERT INTO `paragraf` VALUES (24, 160718039, 9, 'didekat ubaya terdapat sebuah kos brutal ', '2023-12-19 07:58:56');
+INSERT INTO `paragraf` VALUES (25, 160718039, 9, 'anjaz brutal', '2023-12-19 07:59:09');
+INSERT INTO `paragraf` VALUES (26, 160718039, 7, 'ada seorang mahasiswa yang bernama iqbal chobir bujafar', '2023-12-19 13:22:00');
+INSERT INTO `paragraf` VALUES (27, 160718039, 7, 'iqbal terkenal  sangat brutal', '2023-12-19 13:22:09');
+INSERT INTO `paragraf` VALUES (28, 160718039, 10, 'tes cerita 4tes cerita 4tes cerita 4tes cerita 4tes cerita 4tes cerita 4tes cerita 4tes cerita 4', '2023-12-19 14:58:18');
+INSERT INTO `paragraf` VALUES (29, 160718039, 11, 'tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5tes cerita 5', '2023-12-19 14:58:35');
 
 -- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `idusers` int NOT NULL AUTO_INCREMENT,
+  `idusers` int NOT NULL,
   `nama` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `salt` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`idusers`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 160718040 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 160718046 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES (160418002, 'Dwi Rangga Kusuma', 'ff81c3e9996691658ee74688aecb3f0f9908e106', '9e17d78e54');
-INSERT INTO `user` VALUES (160718038, 'Hendra Dami', '8b0fd0f9c652e23708a42f5ec26fe177b86d520e', '704277848b');
-INSERT INTO `user` VALUES (160718039, 'dani', '209d5fae8b2ba427d30650dd0250942af944a0c9', 'e9b612031d');
+INSERT INTO `user` VALUES (111, 'chobir', 'bc2656bbdfead7a4dcae50334ceafb65ad22e065', '86cb50920f');
+INSERT INTO `user` VALUES (160418002, 'Dwi Rangga Kusuma', 'a286dea5c004dbddd0f36b713242da2a51e91807', '9e17d78e54');
+INSERT INTO `user` VALUES (160718038, 'Hendra Dami', '209d5fae8b2ba427d30650dd0250942af944a0c9', '704277848b');
+INSERT INTO `user` VALUES (160718039, 'dani', '1c191e80eecbf9a41a54b1c287f7003b1c9b3efa', 'e9b612031d');
 
 SET FOREIGN_KEY_CHECKS = 1;
