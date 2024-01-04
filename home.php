@@ -3,9 +3,9 @@ session_start();
 
 // Memeriksa apakah sesi sudah dimulai atau belum
 if (!isset($_SESSION['userid'])) {
-    // Redirect ke halaman login jika belum login
-    header("Location: index.php");
-    exit;
+	// Redirect ke halaman login jika belum login
+	header("Location: index.php");
+	exit;
 }
 ?>
 <!DOCTYPE html>
@@ -41,7 +41,7 @@ if (!isset($_SESSION['userid'])) {
 				</div>
 				<button id="more_ceritaku">Tampilkan Cerita Selanjutnya</button>
 			</div>
-			<div class="divider"></div> 
+			<div class="divider"></div>
 			<div class="kumpulan-cerita-container">
 				<h1>kumpulan cerita</h1>
 				<div class="kumpulan-cerita-cards-container">
@@ -65,6 +65,9 @@ if (!isset($_SESSION['userid'])) {
 			} else if (selectedKategori === 'kumpulan-cerita') {
 				$('.ceritaku-container').hide();
 				$('.kumpulan-cerita-container').show();
+			} else if (selectedKategori === '') {
+				$('.ceritaku-container').show();
+				$('.kumpulan-cerita-container').show();
 			}
 		});
 		load_ceritaku();
@@ -79,72 +82,70 @@ if (!isset($_SESSION['userid'])) {
 
 	function load_ceritaku() {
 		var cerita_user_html = "";
-		$.ajax({
-			type: "POST",
-			url: "ceritaku_pagination.php",
-			data: {
-				halaman: halaman_ceritaku,
-			},
-			dataType: "json",
-			success: function(response) {
-				cerita_user_html = ""; 
+		$.post("ceritaku_pagination.php", {
+				halaman: halaman_ceritaku
+			})
+			.done(function(response) {
+				cerita_user_html = "";
+
 				if (response.cerita_user.length > 0) {
 					$.each(response.cerita_user, function(index, row) {
 						cerita_user_html += `
-                        <div class="card">
-                            <h2>${row.judul}</h2>
-                            <p>Pembuat Awal: ${row.nama}</p>
-                            <p>Jumlah Paragraf: ${row.jumlah_paragraf}</p>
-                            <div class="actions"><a href="read.php?id=${row.idcerita}">baca lebih lanjut</a></div>
-                        </div>
-                    `;
+						<div class="card">
+							<h2>${row.judul}</h2>
+							<p>Pembuat Awal: ${row.nama}</p>
+							<p>Jumlah Paragraf: ${row.jumlah_paragraf}</p>
+							<div class="actions"><a href="read.php?id=${row.idcerita}">baca lebih lanjut</a></div>
+						</div>`;
 					});
+
 					$(".ceritaku-cards-container").html(cerita_user_html);
 					halaman_ceritaku++;
 					$('#more_ceritaku').toggle(true);
 				} else {
 					alert('Tidak Ada Data Cerita Lagi');
 					$('#more_ceritaku').toggle(false);
-
 				}
-			}
-		});
+			})
+			.fail(function() {
+				alert('Failed to fetch data from the server');
+			});
+
 	}
 
 	function load_kumpulan_cerita() {
 		var cerita_all_html = "";
 
-		$.ajax({
-			type: "POST",
-			url: "kumpulan_cerita_pagination.php",
-			data: {
-				halaman: halaman_kumpulan_cerita,
-			},
-			dataType: "json",
-			success: function(response) {
+		$.post("kumpulan_cerita_pagination.php", {
+				halaman: halaman_kumpulan_cerita
+			})
+			.done(function(response) {
 				console.log(response);
-				cerita_all_html = ""; 
+				cerita_all_html = "";
+
 				if (response.cerita_all.length > 0) {
 					$.each(response.cerita_all, function(index, row) {
 						cerita_all_html += `
-                        <div class="card">
-                            <h2>${row.judul}</h2>
-                            <p>Pembuat Awal: ${row.nama}</p>
-                            <p>Jumlah Paragraf: ${row.jumlah_paragraf}</p>
-                            <div class="actions"><a href="read.php?id=${row.idcerita}">baca lebih lanjut</a></div>
-                        </div>
-                    `;
+						<div class="card">
+							<h2>${row.judul}</h2>
+							<p>Pembuat Awal: ${row.nama}</p>
+							<p>Jumlah Paragraf: ${row.jumlah_paragraf}</p>
+							<div class="actions"><a href="read.php?id=${row.idcerita}">baca lebih lanjut</a></div>
+						</div>`;
 					});
+
 					$(".kumpulan-cerita-cards-container").html(cerita_all_html);
 					halaman_kumpulan_cerita++;
 					$('#more_kumpulan_cerita').toggle(true);
 				} else {
 					alert('Tidak Ada Data Cerita Lagi');
 					$('#more_kumpulan_cerita').toggle(false);
-
 				}
-			}
-		});
+			})
+			.fail(function() {
+				alert('Failed to fetch data from the server');
+			});
+
 	}
 
 	$('#more_ceritaku').click(function(e) {
@@ -158,22 +159,21 @@ if (!isset($_SESSION['userid'])) {
 	});
 
 	function logout() {
-		$.ajax({
-			type: "POST",
-			url: "logout_proses.php", 
-			dataType: "json",
-			success: function(response) {
+		$.post("logout_proses.php", {})
+			.done(function(response) {
 				console.log(response);
+
 				if (response.success) {
-					window.location.href = "index.php"; 
+					window.location.href = "index.php";
 				} else {
 					alert('Login Gagal, Silahkan coba kembali.');
 				}
-			},
-			error: function() {
+			})
+			.fail(function() {
 				alert('Terjadi Kesalahan Sistem. Silahkan Refresh Kembali Halaman Browser anda.');
-			}
-		});
+			});
+
 	}
 </script>
+
 </html>
